@@ -1,6 +1,7 @@
 {
   "name": "pmta-conf",
   "displayName": "PowerMTA Config",
+  "publisher": "HrBingR",
   "description": "Syntax highlighting and config parsing for PowerMTA config files",
   "version": "0.0.1",
   "engines": {
