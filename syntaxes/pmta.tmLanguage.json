@@ -1,0 +1,117 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "PowerMTA",
+	"patterns": [
+		{
+			"include": "#angle-brackets-expression"
+		},
+		{
+			"include": "#nested-angle-brackets-expression"
+		},
+		{
+			"include": "#other-patterns"
+		}
+	],
+	"repository": {
+		"angle-brackets-expression": {
+			"begin": "^<(?!\\s*\\/)[^>]*>.*",
+			"beginCaptures": {
+				"0": { "name": "punctuation.angle-brackets.open entity.name.tag.html" }
+			},
+			"end": "^<\/.*>",
+			"endCaptures": {
+				"0": { "name": "punctuation.angle-brackets.close entity.name.tag.html" }
+			},
+            "patterns": [
+                {
+                    "include": "#nested-angle-brackets-expression"
+                },
+				{
+					"include": "#other-patterns"
+				}
+            ]
+		},
+		"nested-angle-brackets-expression": {
+			"begin": "^\\s+<(?!\\s*\\/)[^>]*>.*",
+			"beginCaptures": {
+				"0": { "name": "punctuation.nested-angle-brackets.open entity.name.tag.html" }
+			},
+			"end": "^\\s+<\/.*>",
+			"endCaptures": {
+				"0": { "name": "punctuation.nested-angle-brackets.close entity.name.tag.html" }
+			},
+            "patterns": [
+				{
+					"include": "#other-patterns"
+				}
+            ]
+		},
+		"comment": {
+            "patterns": [
+                {
+                    "name": "comment.line.number-sign",
+                    "begin": "(#)",
+                    "beginCaptures": {
+                        "1": { "name": "punctuation.definition.comment" }
+                    },
+                    "end": "(?=\\n|$)"
+                }
+            ]
+        },
+		"other-patterns": {
+			"patterns": [
+				{
+					"name": "comment.line.number-sign",
+					"begin": "(\\s+#|^#)",
+					"beginCaptures": {
+						"0": { "name": "punctuation.definition.comment" }
+					},
+					"end": "(?=\\n|$)"
+				},
+				{
+					"begin": "^(\\S+)",
+					"beginCaptures": {
+						"1": { "name": "entity.other.attribute-name.html" }
+					},
+					"end": "(\\n|$)",
+					"patterns": [
+						{
+							"match": "([^\\s#]+)(?=\\s|$|#)",
+							"name": "string.quoted.double.html"
+						},
+						{
+							"begin": "(#)",
+							"beginCaptures": {
+								"1": { "name": "punctuation.definition.comment" }
+							},
+							"end": "(\\n|$)",
+							"name": "comment.line.number-sign"
+						}
+					]
+				},
+				{
+					"begin": "^\\s+(\\S+)\\s",
+					"beginCaptures": {
+						"1": { "name": "entity.other.attribute-name.html" }
+					},
+					"end": "(\\n|$)",
+					"patterns": [
+						{
+							"match": "([^\\s#]+)(?=\\s|$|#)",
+							"name": "string.quoted.double.html"
+						},
+						{
+							"begin": "(#)",
+							"beginCaptures": {
+								"1": { "name": "punctuation.definition.comment" }
+							},
+							"end": "(\\n|$)",
+							"name": "comment.line.number-sign"
+						}
+					]
+				}
+			]
+		}
+	},
+	"scopeName": "source.pmta"
+}

@@ -1,0 +1,34 @@
+{
+  "name": "pmta-conf",
+  "displayName": "PowerMTA Config",
+  "description": "Syntax highlighting and config parsing for PowerMTA config files",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "author": {
+    "name": "Anthony Smillie"
+  },
+  "pricing": "Free",
+  "license": "GNU General Public License v3.0",
+  "keywords": ["pmta", "powermta", "sparkpost"],
+  "categories": [
+    "Programming Languages"
+  ],
+  "bugs": {
+    "url": "https://github.com/HrBingR/pmta-conf"
+  },
+  "contributes": {
+    "languages": [{
+      "id": "pmta",
+      "aliases": ["PowerMTA", "pmta"],
+      "extensions": [".pmta", ".txt", "config"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "pmta",
+      "scopeName": "source.pmta",
+      "path": "./syntaxes/pmta.tmLanguage.json"
+    }]
+  }
+}
